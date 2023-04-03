@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CursorPositionConversion : MonoBehaviour
 {
-    private float _xPosition;
-    private float _yPosition;
+    private float _earthPositionX;
+    private float _earthPositionY;
     void Start()
     {
 
@@ -14,25 +14,23 @@ public class CursorPositionConversion : MonoBehaviour
 
     void Update()
     {
-        // Récupérer la position de la souris sur l'écran
-        Vector3 mousePos = Input.mousePosition;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        // Convertir la position de la souris en coordonnées du monde
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
-
-        // Convertir la position en coordonnées locales de l'objet
-        Vector3 localPos = transform.InverseTransformPoint(worldPos);
-
-        // Récupérer le rayon de la sphère à partir de son échelle
-        float sphereRadius = Mathf.Max(transform.localScale.x, transform.localScale.y, transform.localScale.z) / 2f;
-
-        // Vérifier si la position locale est à l'intérieur de la sphère
-        if (localPos.magnitude <= sphereRadius)
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
         {
-            // Faire quelque chose avec la position récupérée
-            // ...
-            Debug.Log(localPos.x);
+            // récupérez la position de l'impact sur la sphère
+            Vector3 spherePos = hit.point;
+            Debug.Log(spherePos);
+            // convertir la position de la sphère en coordonnées de latitude et de longitude
+            float lat = Mathf.Atan2(spherePos.y, spherePos.x) * Mathf.Rad2Deg;
+            float lon = Mathf.Asin(spherePos.z) * Mathf.Rad2Deg;
+            //float lon = Mathf.Asin(Mathf.Clamp(spherePos.z, -1f, 1f)) * Mathf.Rad2Deg;
+            Debug.Log("latitude" + lat);
+            Debug.Log("longitude" + lon);
         }
     }
+
+
 
 }
