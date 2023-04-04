@@ -18,7 +18,7 @@ public class EarthRotation : MonoBehaviour
 
     void Update()
     {
-        AutoRotation();
+        //AutoRotation();
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
