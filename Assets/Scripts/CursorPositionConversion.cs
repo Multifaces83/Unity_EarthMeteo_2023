@@ -4,10 +4,12 @@ using UnityEngine;
 public class CursorPositionConversion : MonoBehaviour
 {
 
+
     void OnMouseDown()
     {
         GetLatitude();
         GetLongitude();
+        Debug.Log("local rotation : " + transform.localRotation);
     }
 
     public float GetLatitude()

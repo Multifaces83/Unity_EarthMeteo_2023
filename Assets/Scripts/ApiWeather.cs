@@ -63,6 +63,7 @@ public class ApiWeather : MonoBehaviour
     {
         public float lon;
         public float lat;
+
     }
 
     [System.Serializable]
@@ -89,7 +90,7 @@ public class ApiWeather : MonoBehaviour
     public class Sys
     {
         public string country;
-        public string name;
+
     }
 
     [System.Serializable]
@@ -99,6 +100,7 @@ public class ApiWeather : MonoBehaviour
         public Weather[] weather;
         public Main main;
         public Sys sys;
+        public string name;
     }
 
 
@@ -118,12 +120,11 @@ public class ApiWeather : MonoBehaviour
             {
                 _cityError.text = "";
                 WeatherData weatherData = JsonUtility.FromJson<WeatherData>(webRequest.downloadHandler.text);
-                //_cityName.text = "City : " + weatherData.sys.name + ", " + weatherData.sys.country;
-                _city = "City : " + weatherData.sys.name + ", " + weatherData.sys.country;
-                Debug.Log("city : " + weatherData.sys.name + ", " + weatherData.sys.country);
+                _cityName.text = "City : " + weatherData.name + ", " + weatherData.sys.country;
+                Debug.Log("city : " + weatherData.name + ", " + weatherData.sys.country);
                 _lon = weatherData.coord.lon;
                 _lat = weatherData.coord.lat;
-                Debug.Log("lat : " + _lat + "lat : " + _lon);
+                Debug.Log("lat : " + _lat + "long : " + _lon);
                 _weather.text = "Weather : " + weatherData.weather[0].main;
                 _iconCode = weatherData.weather[0].icon;
                 _temperature.text = "Temperature : " + (weatherData.main.temp - 273.15f).ToString("0.00") + "°C";
