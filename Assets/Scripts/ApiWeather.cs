@@ -13,15 +13,25 @@ public class ApiWeather : MonoBehaviour
     private string _iconCode = "";
     private float _lat = 0;
     private float _lon = 0;
+
+    [SerializeField] private GameObject _marker;
+
+    private float _markerDecalage = 30f;
     [SerializeField] private TextMeshProUGUI _cityError;
     [SerializeField] private TMP_InputField _SearchInput;
     [SerializeField] private TextMeshProUGUI _cityName;
     [SerializeField] private Image _weatherIcon;
     [SerializeField] private TextMeshProUGUI _weather;
     [SerializeField] private TextMeshProUGUI _temperature;
+    [SerializeField] private TextMeshProUGUI _feelsLike;
+    [SerializeField] private TextMeshProUGUI _temperatureMin;
+    [SerializeField] private TextMeshProUGUI _temperatureMax;
+    [SerializeField] private TextMeshProUGUI _humidity;
+    [SerializeField] private TextMeshProUGUI _pressure;
 
     void Start()
     {
+        _weatherIcon.enabled = false;
         _cursorPositionConversion = GetComponent<CursorPositionConversion>();
         _SearchInput.onValueChanged.AddListener(delegate { onValueChanged(); });
     }
@@ -43,6 +53,7 @@ public class ApiWeather : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            //_marker.transform.position = new Vector3(_cursorPositionConversion.GetCursorPosition().x + _markerDecalage, _cursorPositionConversion.GetCursorPosition().y + _markerDecalage, _cursorPositionConversion.GetCursorPosition().z);
             _city = _SearchInput.text;
             StartCoroutine(GetRequest("https://api.openweathermap.org/data/2.5/weather?q=" + _city + "&APPID=fb7ea3ac85bb67a9bdb0b4b9a51f1c72"));
         }
@@ -52,6 +63,7 @@ public class ApiWeather : MonoBehaviour
         //_city = _SearchInput.text;
         if (Input.GetMouseButtonDown(0))
         {
+            //_marker.transform.position = new Vector3(_cursorPositionConversion.GetCursorPosition().x + _markerDecalage, _cursorPositionConversion.GetCursorPosition().y + _markerDecalage, _cursorPositionConversion.GetCursorPosition().z);
             _lat = _cursorPositionConversion.GetLatitude();
             _lon = _cursorPositionConversion.GetLongitude();
             StartCoroutine(GetRequest("https://api.openweathermap.org/data/2.5/weather?lat=" + _lat + "&lon=" + _lon + "&appid=fb7ea3ac85bb67a9bdb0b4b9a51f1c72"));
@@ -121,13 +133,16 @@ public class ApiWeather : MonoBehaviour
                 _cityError.text = "";
                 WeatherData weatherData = JsonUtility.FromJson<WeatherData>(webRequest.downloadHandler.text);
                 _cityName.text = "City : " + weatherData.name + ", " + weatherData.sys.country;
-                Debug.Log("city : " + weatherData.name + ", " + weatherData.sys.country);
                 _lon = weatherData.coord.lon;
                 _lat = weatherData.coord.lat;
-                Debug.Log("lat : " + _lat + "long : " + _lon);
                 _weather.text = "Weather : " + weatherData.weather[0].main;
                 _iconCode = weatherData.weather[0].icon;
                 _temperature.text = "Temperature : " + (weatherData.main.temp - 273.15f).ToString("0.00") + "°C";
+                _feelsLike.text = "Feels like : " + (weatherData.main.feels_like - 273.15f).ToString("0.00") + "°C";
+                _temperatureMin.text = "Temperature min : " + (weatherData.main.temp_min - 273.15f).ToString("0.00") + "°C";
+                _temperatureMax.text = "Temperature max : " + (weatherData.main.temp_max - 273.15f).ToString("0.00") + "°C";
+                _humidity.text = "Humidity : " + weatherData.main.humidity + "%";
+                _pressure.text = "Pressure : " + weatherData.main.pressure + "hPa";
 
                 StartCoroutine(LoadImage());
                 Debug.Log("Received: " + webRequest.downloadHandler.text);
@@ -150,6 +165,7 @@ public class ApiWeather : MonoBehaviour
             Texture2D texture = DownloadHandlerTexture.GetContent(www);
             Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
             _weatherIcon.sprite = sprite;
+            _weatherIcon.enabled = true;
         }
     }
 }
