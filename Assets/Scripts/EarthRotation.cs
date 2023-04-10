@@ -7,7 +7,7 @@ public class EarthRotation : MonoBehaviour
     private bool _autoRotate = true;
     private float _speedRotation = 0.1f;
     private float _sensitivity = 1f;
-    private float _autoSpeedRotation = 0.009f;
+    private float _autoSpeedRotation = 0.05f;
     private float _resetRotationTime = 2f;
     private float _resetRotationTimer = 0f;
 

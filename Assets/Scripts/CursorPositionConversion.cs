@@ -10,7 +10,6 @@ public class CursorPositionConversion : MonoBehaviour
         GetCursorPosition();
         GetLatitude();
         GetLongitude();
-        Debug.Log("local rotation : " + transform.localRotation);
     }
 
     public Vector3 GetCursorPosition()
@@ -19,9 +18,9 @@ public class CursorPositionConversion : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            Vector3 position = hit.point;
-            Vector3 localPoint = transform.InverseTransformPoint(position);
-            return localPoint;
+            Vector3 worldpoint = hit.point;
+            return worldpoint;
+
         }
         return Vector3.zero;
     }

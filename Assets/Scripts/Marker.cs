@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Marker : MonoBehaviour
 {
+    private CursorPositionConversion _cursorPositionConversion;
+    private Vector3 markerPosition;
     [SerializeField] private Transform _earthTransform;
     // Start is called before the first frame update
     void Start()
     {
-        //transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
     }
 
     // Update is called once per frame

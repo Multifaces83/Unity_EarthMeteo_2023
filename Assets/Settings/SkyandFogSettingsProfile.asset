@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d877ec3e844f2ca46830012e8e79319b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   rotation:
     m_OverrideState: 1
     m_Value: 0
@@ -152,19 +152,19 @@ MonoBehaviour:
     m_Value: 5.2
   skyIntensityMode:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 2
   exposure:
     m_OverrideState: 1
     m_Value: 12.54
   multiplier:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 61992
   upperHemisphereLuxValue:
     m_OverrideState: 1
-    m_Value: 1.111283
+    m_Value: 0.0407407
   upperHemisphereLuxColor:
     m_OverrideState: 1
-    m_Value: {x: 0.35842633, y: 0.41322505, z: 0.5}
+    m_Value: {x: 0.5, y: 0.46390754, z: 0.42938936}
   desiredLuxValue:
     m_OverrideState: 1
     m_Value: 20000
@@ -179,7 +179,7 @@ MonoBehaviour:
     m_Value: 0
   hdriSky:
     m_OverrideState: 1
-    m_Value: {fileID: 8900000, guid: bde709774d7ba81418b10084a3726750, type: 3}
+    m_Value: {fileID: 8900000, guid: 90decc20c1ee0a644affc5c4c4ff6b8b, type: 3}
   distortionMode:
     m_OverrideState: 1
     m_Value: 0
@@ -267,7 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 953beb541740ddc499d005ee80c9ff29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   quality:
     m_OverrideState: 0
     m_Value: 1
@@ -376,7 +376,7 @@ MonoBehaviour:
   active: 1
   skyType:
     m_OverrideState: 1
-    m_Value: 4
+    m_Value: 1
   cloudType:
     m_OverrideState: 0
     m_Value: 0
